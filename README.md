@@ -2,9 +2,18 @@
 
 ![Rio splash](public/rio_readme.jpg)
 
+How to Run:
+```
+git clone https://github.com/creativcoder/rio
+
+npm install
+
+npm run serve
+
+```
 
 
-Overview: 
+Overview (In progress):
 
 Although Rio being a single page app, we do have two high level divsions here using `react-router`.
 
