@@ -14,15 +14,15 @@ const default_state = {
 export default (state = Immutable.Map(default_state), action) => {
     switch (action.type) {
         case AUTH_REQUEST: {
-            console.log(`Action: ${action.payload}`);
+            console.log(`ActionRequest: ${action.payload}`);
             return state.set('loading', action.payload)
         }
         case AUTH_SUCCESS: {
-            console.log(`Action: ${action.payload}`);
+            console.log(`ActionSuccess: User = ${action.payload.name}`);
             return state.set('profile', action.payload)
         }
         case AUTH_FAILURE: {
-            console.log(`Action: ${action.payload}`);
+            console.log(`ActionFailure: ${action.payload}`);
             return state.set('error_code', action.err_no)
         }
         default: return state
