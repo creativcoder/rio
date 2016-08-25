@@ -1,5 +1,6 @@
 import React from 'react';
 import Tweet from './Tweet';
+import { connect } from 'react-redux';
 
 class TweetList extends React.Component {
 	renderTweets() {
