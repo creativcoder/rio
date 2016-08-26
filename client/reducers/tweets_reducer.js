@@ -1,7 +1,8 @@
-import Immutable from 'immutable';
+import { TWITTER_FEED } from '../constants/action_type';
 
-export default function(state=Immutable.Map({}), action) {
+export default function(state=[], action) {
 	switch(action.type) {
-		default: return state;	
+		case TWITTER_FEED: return action.payload;
+		default: return state;
 	}
 }

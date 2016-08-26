@@ -4,7 +4,7 @@ import TweetReducer from './tweets_reducer';
 
 const rootReducer = combineReducers({
   login: LoginReducer,
-  tweets: TweetReducer 
+  tweets: TweetReducer
 });
 
 export default rootReducer;
