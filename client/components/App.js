@@ -12,16 +12,17 @@ export default class App extends React.Component {
     requireAuth(nextState, replace) {
         if (store.getState().login.authenticated===null) {
             replace({
-                pathname: '/login',
+                pathname: '/',
                 state: { nextPathname: nextState.location.pathname }
             })
         }
     }
     render() {
-        return (<Router history={browserHistory}>
-            <Route path="/" component={Dashboard} onEnter={this.requireAuth}/>
-            <Route path="login" component={Login}/>
-            <Route path="dashboard" component={Dashboard}/>
-        </Router>);
+        return (
+            <Router history={browserHistory}>
+            <Route path="/" component={Login}/>
+            <Route path="home" component={Dashboard} onEnter={this.requireAuth}/>
+            </Router>
+        );
     }
 }

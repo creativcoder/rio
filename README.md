@@ -2,6 +2,11 @@
 
 ![Rio splash](public/rio_readme.jpg)
 
+![Rio Screen](public/tweet_login.png)
+
+![Rio Screen](public/tweet_yay.png)
+
+
 How to Run:
 ```
 git clone https://github.com/creativcoder/rio

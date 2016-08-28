@@ -17,9 +17,13 @@ export default class Tweetbox extends React.Component {
     render() {
         return (
             <div style={box_style}>
-                <textarea className="form-control" onChange={this.count_chars} width={200} height={100}></textarea><br/>
+                <textarea className="form-control new-tweet" onChange={this.count_chars} width={200} height={200}></textarea><br/>
                 <span>{this.state.cur_chars}
-                <button className="tweet-btn btn btn-primary pull-right" onClick={this.props.postTweet}>Tweet!</button>
+                <button className="tweet-btn btn btn-primary pull-right" onClick={()=> {
+                    const status = document.querySelector('.new-tweet').value;
+                    this.props.postTweet(status)
+                    }
+                }>Tweet!</button>
                 </span>
             </div>
         )

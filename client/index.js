@@ -12,5 +12,5 @@ export const store = createStoreWithMiddleware(rootReducer, redux_devtools);
 
 render(<Provider store={store}>
 	<App/>
-	</Provider>, document.getElementById('app')
+	</Provider>, document.querySelector('.app')
 );

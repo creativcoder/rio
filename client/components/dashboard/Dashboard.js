@@ -8,8 +8,7 @@ class Dashboard extends React.Component {
     render() {
         return (
             <div className="dashboard container">
-            <Navbar/>
-            <Tweetbox/>
+            <Navbar user={this.props.login.user}/>
             <Tweetlist/>
             </div>
         );

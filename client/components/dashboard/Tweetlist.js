@@ -1,6 +1,8 @@
 import React from 'react';
 import Tweet from './Tweet';
 import { connect } from 'react-redux';
+import Spinner from 'react-spinkit';
+
 
 class Tweetlist extends React.Component {
 	renderTweets() {
@@ -8,14 +10,23 @@ class Tweetlist extends React.Component {
 			return (<Tweet key={tweet.id} tweet={tweet}/>);
 		});
 	}
+	renderSpinner() {
+		return <div style={parent_style}><div><Spinner spinnerName='three-bounce' /></div></div>;
+	}
 	render() {
 		return (
-			<ul className="list-group col-sm-14">
-				{ this.props.tweets.length>0?this.renderTweets():<h3>Oops, something went wrong :|</h3> }
+			<ul className="list-group col-sm-12">
+				{ this.props.tweets.length>0?this.renderTweets():this.renderSpinner() }
 			</ul>
 		)
 	}
 }
 
-const mapStateToProps = ({tweets, login}) => ({tweets, login});
-export default connect(mapStateToProps, null)(Tweetlist);
+const parent_style = {
+	textAlign: 'center',
+	'display':'flex',
+	'justifyContent':'center'
+}
+
+const mapStateToProps = ({tweets}) => ({tweets});
+export default connect(mapStateToProps)(Tweetlist);
