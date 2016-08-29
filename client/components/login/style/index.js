@@ -12,6 +12,11 @@ export const login_style = {
     'height':'50px'
 }
 
+export const spinner_style = {
+    'margin':'0 auto',
+    'textAlign':'center',
+}
+
 export const logo_style = {
     'paddingTop': '20%',
     'paddingBottom':'10%',

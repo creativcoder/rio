@@ -11,7 +11,7 @@ class Tweetlist extends React.Component {
 		});
 	}
 	renderSpinner() {
-		return <div style={parent_style}><div><Spinner spinnerName='three-bounce' /></div></div>;
+		return <div style={parent_style}><div><br/><Spinner spinnerName='three-bounce' /></div></div>;
 	}
 	render() {
 		return (

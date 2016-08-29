@@ -7,15 +7,29 @@
 ![Rio Screen](public/tweet_yay.png)
 
 
-How to Run:
+How to Run (Development mode):
+
 ```
+
 git clone https://github.com/creativcoder/rio
 
 npm install
 
-npm run serve
+npm run start
 
 ```
+
+
+Features: 
+
+* Post Tweet
+* Retweet
+
+* Like Tweet
+
+* Auto Login
+
+* Profile View (basic)
 
 
 Overview (In progress):
@@ -37,4 +51,15 @@ and will consist of the following major ContainerComponents along with their Pre
    |--TweetComponent - Represents a single tweet, with buttons like (fav, retweet, reply, message)
 ```
 
-NOTE: This readme will be updated to include the actions creators, reducers that these components will generate as well as the global state structure when the Rio's architecture is well defined.
+Rio's redux store basically consists of:
+
+```javascript
+
+{
+	login: {
+		authenticated: {...} (auth object from OAuth.io)
+	}
+	tweets: [...] (Array of 20 tweets pulled from Twitter api)
+}
+
+```

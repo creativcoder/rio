@@ -21,7 +21,7 @@ import { store } from '../index';
 
 export const authorize = (pub_key) => {
     OAuth.initialize(pub_key);
-    OAuth.popup('twitter').then((auth_data) => {
+    OAuth.popup('twitter', {cache:true}).then((auth_data) => {
     auth_data.me().then((user)=>{
         store.dispatch({type: UPDATE_USER, payload: user})
     })
