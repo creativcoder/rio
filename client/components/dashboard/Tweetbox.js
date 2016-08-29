@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { postTweet } from '../../actions';
 import { bindActionCreators } from 'redux';
 
-export default class Tweetbox extends React.Component {
+class Tweetbox extends React.Component {
     constructor(props) {
         super(props);
         this.state = {cur_chars: 140, max_chars: 140};
