@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "nodemon --watch server --exec babel-node -- server/index"
+    "start": "nodemon --watch server --exec babel-node -- server/index"
   },
   "repository": {
     "type": "git",
