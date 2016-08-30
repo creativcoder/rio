@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { postTweet } from '../../actions';
+import { postTweet, reply } from '../../actions';
 import { bindActionCreators } from 'redux';
 
 export default class Tweetbox extends React.Component {
@@ -21,7 +21,11 @@ export default class Tweetbox extends React.Component {
                 <span>{this.state.cur_chars}
                 <button className="tweet-btn btn btn-primary pull-right" onClick={()=> {
                     const status = document.querySelector('.new-tweet').value;
-                    this.props.postTweet(status)
+                    if (this.props.entities.type==="reply" && this.props.entities.recepient) {
+                            reply(this.props.entities.recepient, status);
+                        } else {
+                            postTweet(status);
+                        }
                     }
                 }>Tweet!</button>
                 </span>
@@ -34,5 +38,5 @@ const box_style = {
     'paddingBottom': '20px'
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({postTweet}, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators({postTweet, reply}, dispatch)
 export default connect(null, mapDispatchToProps)(Tweetbox);

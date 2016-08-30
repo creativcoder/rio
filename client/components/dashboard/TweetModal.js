@@ -2,7 +2,7 @@ import { Modal, Button, Popover, OverlayTrigger, Tooltip } from 'react-bootstrap
 import React from 'react';
 import Tweetbox from './Tweetbox';
 
-const Example = React.createClass({
+const TweetModal = React.createClass({
   getInitialState() {
     return { showModal: false };
   },
@@ -13,19 +13,9 @@ const Example = React.createClass({
     this.setState({ showModal: true });
   },
   render() {
-    const popover = (
-      <Popover id="modal-popover" title="popover">
-        very popover. such engagement
-      </Popover>
-    );
-    const tooltip = (
-      <Tooltip id="modal-tooltip">
-        wow.
-      </Tooltip>
-    );
-
     return (
       <div>
+        <i onClick={this.open} className="fa fa-retweet" aria-hidden="true"></i>
         <Button
           bsStyle="primary"
           bsSize="large"
@@ -38,7 +28,7 @@ const Example = React.createClass({
           </Modal.Header>
           <Modal.Body>
           <div>
-          <Tweetbox/>
+          <Tweetbox entities={this.props.entities}/>
           </div>
           </Modal.Body>
         </Modal>
@@ -47,6 +37,4 @@ const Example = React.createClass({
   }
 });
 
-
-
-export default Example;
+export default TweetModal;

@@ -3,11 +3,10 @@ import React from 'react';
 import { store } from '../../index';
 import { authorize } from '../../actions/index';
 import { connect } from 'react-redux';
-import { RIO_PUBLIC_KEY } from '../../constants/config';
+import { RIO_PUBLIC_KEY, persistance_enabled } from '../../constants/config';
 import { Router, browserHistory } from 'react-router';
 import { Checkbox, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Spinner from 'react-spinkit';
-import { persistance_enabled } from '../../constants/config';
 
 import { bindActionCreators } from 'redux';
 import { flex_wrapper, logo_style, login_style, spinner_style } from './style';

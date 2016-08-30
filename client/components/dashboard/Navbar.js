@@ -18,7 +18,7 @@ export default class Navbar extends React.Component {
             </div>
             <div className="collapse navbar-collapse">
                 <ul className="nav navbar-nav navbar-right">
-                <TweetModal/>
+                <TweetModal entities={{type:"tweet", alias: null, recepient:null}}/>
                 </ul>
             </div>
             </div>

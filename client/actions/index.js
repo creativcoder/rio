@@ -54,6 +54,16 @@ export const likeTweet = (id) => {
     return { type:LIKE_TWEET, payload: liked_tweet }
 };
 
+export const reply = (recepient_id, reply) => {
+    const replied_tweet = store.getState().login.authenticated.post(post_tweet_uri,
+    { 
+        data: {
+            status: reply,
+            in_reply_to_status_id: recepient_id 
+        }
+    })
+}
+
 export const retweet = (tweet) => {
     if (tweet.retweeted===false) {
         return {

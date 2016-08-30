@@ -2,23 +2,26 @@ import React from 'react';
 import { store } from '../../index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { retweet } from '../../actions/index';
-import { likeTweet } from '../../actions/index';
+import { retweet, likeTweet } from '../../actions';
+import ReplyModal from './ReplyModal';
+import { Collapse, Well } from 'react-bootstrap';
 
-const Tweet = ({tweet, retweet}) => {
+const Tweet = ({tweet, retweet, likeTweet}) => {
     return (
         <li className="list-group-item"
             key={tweet.id}>
                 <div>
                 <h5><img width="64px" height="64px" src={tweet.user.profile_image_url}/>
-                    &nbsp;&nbsp;{tweet.text}</h5>
+                    &nbsp;&nbsp;{tweet.user.name}(<strong>@{tweet.user.screen_name}</strong>)<br/>{tweet.text}
+                    </h5>
                 <div className="flex-container" style={flex_style}>
-                    <a style={fa_style}
-                    href="#"
-                    data-toggle="tooltip"
-                    title="Share"><i className="fa fa-reply {tweet.id_str}" aria-hidden="true"></i>
-                    </a>
-
+                    <ReplyModal entities={
+                        {   
+                            type: "reply",
+                            alias: tweet.user.screen_name,
+                            recepient: tweet.id_str
+                        }
+                    }/>
                     <a onClick={e => {
                         modify_style('.retweet'+tweet.id_str);
                         retweet(tweet);
