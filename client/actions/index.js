@@ -42,7 +42,6 @@ export const show_feed = () => {
 }
 
 export const postTweet = (new_tweet) => {
-    console.log('Received Tweet action');
     return {
         type: POST_TWEET,
         payload: store.getState().login.authenticated.post(post_tweet_uri, {data: {status: new_tweet} })

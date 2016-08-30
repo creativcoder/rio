@@ -12,14 +12,43 @@ import { persistance_enabled } from '../../constants/config';
 import { bindActionCreators } from 'redux';
 import { flex_wrapper, logo_style, login_style, spinner_style } from './style';
 
-const render_login = () => (<button type="button" id="login-btn"
-                style={login_style}
+const render_login = () => (
+    <div style={login_style}>
+    <p>You are connected now</p>
+    <button type="button" id="login-btn"
                 className="btn btn-primary" onClick={() => authorize(RIO_PUBLIC_KEY)}>Connect to Twitter!
-                </button>);
+                </button>
+                </div>);
+
+const not_connected = () => {
+    return (<div style={login_style}>
+    <p>Um, looks like you are not connected!</p>
+    <button type="button" id="login-btn"
+        className="btn btn-primary" onClick={() => {
+            if(!navigator.onLine){
+                return false;
+            }
+            authorize(RIO_PUBLIC_KEY)
+        }}>Connect to Twitter!
+    </button>
+    </div>);
+}
+
+const render_network_error = () => {
+    return (<p style={login_style}>Um, looks like you are not connected!</p>);
+}
 
 const render_spinner = () => {
     setTimeout(()=>{authorize(RIO_PUBLIC_KEY)}, 4000);
     return (<Spinner style={spinner_style} spinnerName='double-bounce'/>);
+}
+
+const prepare_login = () => {
+    if (persistance_enabled()) {
+        return render_spinner();
+    } else {
+        render_login();
+    }
 }
 
 const Login = ({authorize}) => {
@@ -28,8 +57,7 @@ const Login = ({authorize}) => {
             <div className="login-screen" style={flex_wrapper}>
                 <i className="fa fa-twitter" style={logo_style} aria-hidden="true"></i>
                 <h1 style={login_style}>Rio</h1>
-                {persistance_enabled()?render_spinner():render_login()}
-                
+                {navigator.onLine?prepare_login():not_connected()}
             </div>
         </div>
     );    
