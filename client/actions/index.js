@@ -7,11 +7,13 @@ import { AUTH_REQUEST,
          LIKE_TWEET,
          RETWEET,
          ERROR_RETWEET,
-         TWITTER_FEED,
+         HOME_FEED,
+         USER_FEED,
          UPDATE_USER } from '../constants/action_type';
 
 // API endpoints
-import { feed_uri,
+import { home_uri,
+         user_uri,
          post_tweet_uri,
          like_uri,
          retweet_uri } from '../constants/action_type';
@@ -27,17 +29,24 @@ export const authorize = (pub_key) => {
     })
     store.dispatch({type: AUTH_SUCCESS, payload: auth_data});
     browserHistory.push('home');
-    show_feed();
+    home_timeline();
     });
     return {
         type: AUTH_REQUEST
     }
 }
 
-export const show_feed = () => {
+export const home_timeline = () => {
     store.dispatch({
-        type: TWITTER_FEED,
-        payload: store.getState().login.authenticated.get(feed_uri)
+        type: HOME_FEED,
+        payload: store.getState().login.authenticated.get(home_uri)
+    })
+}
+
+export const user_timeline = () => {
+    store.dispatch({
+        type: USER_FEED,
+        payload: store.getState().login.authenticated.get(user_uri)
     })
 }
 

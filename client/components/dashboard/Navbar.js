@@ -1,5 +1,9 @@
 import React from 'react';
 import TweetModal from './TweetModal';
+import Spinner from 'react-spinkit';
+import {Glyphicon} from 'react-bootstrap';
+import Notification from '../misc/Notification';
+
 
 export default class Navbar extends React.Component {
     constructor(props) {
@@ -14,15 +18,21 @@ export default class Navbar extends React.Component {
             <nav className="navbar navbar-default">
             <div className="container-fluid">
             <div className="navbar-header">
-                <a className="navbar-brand" href="#"><strong>@{this.getUser()?this.getUser().alias:""}</strong></a>
+                <a className="navbar-brand" href="#"><strong>{this.getUser()?'@'+this.getUser().alias:<Spinner spinnerName="wave" />}</strong></a>
             </div>
-            <div className="collapse navbar-collapse">
-                <ul className="nav navbar-nav navbar-right">
-                <TweetModal entities={{type:"tweet", alias: null, recepient:null}}/>
+                <ul style={nav_style} className="nav navbar-nav navbar-right">
+                <TweetModal glyph="send" entities={{type:"tweet", alias: null, recepient:null}}/>
                 </ul>
+                {navigator.onLine?"":<Notification/>}
             </div>
-            </div>
+            
         </nav>
         );
     }
+}
+
+const nav_style = {
+    padding: '10px',
+    marginTop: '7px',
+    marginRight: '1px',
 }

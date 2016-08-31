@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { store } from '../../index';
 import { authorize } from '../../actions/index';
 import { connect } from 'react-redux';
 import { RIO_PUBLIC_KEY, persistance_enabled } from '../../constants/config';
@@ -24,10 +23,11 @@ const not_connected = () => {
     <p>Um, looks like you are not connected!</p>
     <button type="button" id="login-btn"
         className="btn btn-primary" onClick={() => {
-            if(!navigator.onLine){
+            if(navigator.onLine){
+                authorize(RIO_PUBLIC_KEY);
+            } else {
                 return false;
             }
-            authorize(RIO_PUBLIC_KEY)
         }}>Connect to Twitter!
     </button>
     </div>);
@@ -39,7 +39,11 @@ const render_network_error = () => {
 
 const render_spinner = () => {
     setTimeout(()=>{authorize(RIO_PUBLIC_KEY)}, 4000);
-    return (<Spinner style={spinner_style} spinnerName='double-bounce'/>);
+    return (
+        <div style={spinner_style}>
+        <p>Logging you in...</p>
+        <Spinner style={spinner_style} spinnerName='double-bounce'/>
+        </div>);
 }
 
 const prepare_login = () => {

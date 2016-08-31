@@ -3,12 +3,13 @@ import Tweet from './Tweet';
 import { connect } from 'react-redux';
 import Spinner from 'react-spinkit';
 
-
 class Tweetlist extends React.Component {
 	renderTweets() {
-		return this.props.tweets.map(function(tweet) {
-			return (<Tweet key={tweet.id} tweet={tweet}/>);
-		});
+		if (this.props.user_tweets) {
+			return this.props.tweets.map((tweet) => (<Tweet key={tweet.id} tweet={tweet}/>));	
+		} else {
+			return this.props.tweets.map((tweet) => (<Tweet key={tweet.id} tweet={tweet}/>));
+		}
 	}
 	renderSpinner() {
 		return <div style={parent_style}><div><br/><Spinner spinnerName='three-bounce' /></div></div>;
@@ -16,7 +17,7 @@ class Tweetlist extends React.Component {
 	render() {
 		return (
 			<ul className="list-group col-sm-12">
-				{ this.props.tweets.length>0?this.renderTweets():this.renderSpinner() }
+				{ this.props.tweets.length>0? this.renderTweets():this.renderSpinner() }
 			</ul>
 		)
 	}

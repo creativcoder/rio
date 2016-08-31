@@ -2,7 +2,6 @@ import { AUTH_REQUEST,
       AUTH_SUCCESS,
       AUTH_ERROR,
       LOGOUT,
-      TWITTER_FEED,
       UPDATE_USER } from '../constants/action_type';
 
 const default_state = {
