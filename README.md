@@ -2,9 +2,9 @@
 
 ![Rio splash](public/rio_readme.jpg)
 
-![Rio Screen](public/tweet_login.png)
+![Rio Screen](public/login.png)
 
-![Rio Screen](public/tweet_yay.png)
+![Rio Screen](public/home.png)
 
 
 How to Run (Development mode):
@@ -15,7 +15,7 @@ git clone https://github.com/creativcoder/rio
 
 npm install
 
-npm run start
+npm start
 
 ```
 
@@ -23,16 +23,13 @@ npm run start
 Features: 
 
 * Post Tweet
-* Retweet
-
-* Like Tweet
-
+* Retweet/UnRetweet
+* Like/Unlike Tweet
 * Auto Login
+* Profile View and user tweets
 
-* Profile View (basic)
 
-
-Overview (In progress):
+Overview:
 
 Although Rio being a single page app, we do have two high level divsions here using `react-router`.
 

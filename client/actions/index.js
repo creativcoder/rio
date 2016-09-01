@@ -5,7 +5,9 @@ import { AUTH_REQUEST,
          AUTH_SUCCESS,
          POST_TWEET,
          LIKE_TWEET,
+         UNLIKE_TWEET,
          RETWEET,
+         UNRETWEET,
          ERROR_RETWEET,
          HOME_FEED,
          USER_FEED,
@@ -16,7 +18,9 @@ import { home_uri,
          user_uri,
          post_tweet_uri,
          like_uri,
-         retweet_uri } from '../constants/action_type';
+         unlike_uri,
+         retweet_uri,
+         unRetweet_uri } from '../constants/action_type';
 
 import { browserHistory, router } from 'react-router';
 import { store } from '../index';
@@ -57,10 +61,14 @@ export const postTweet = (new_tweet) => {
     }
 }
 
-export const likeTweet = (id) => {
-    console.log(id);
-    const liked_tweet = store.getState().login.authenticated.post(like_uri, {data: {id} })
-    return { type:LIKE_TWEET, payload: liked_tweet }
+export const likeTweet = (tweet) => {
+    if(tweet.favorited) {
+        const payload = store.getState().login.authenticated.post(unlike_uri, {data: {id:tweet.id_str} });
+        return {type: UNLIKE_TWEET, payload: payload}
+    } else {
+        const payload = store.getState().login.authenticated.post(like_uri, {data: {id:tweet.id_str} })
+        return {type: LIKE_TWEET, payload: payload}
+    }
 };
 
 export const reply = (recepient_id, reply) => {
@@ -74,15 +82,15 @@ export const reply = (recepient_id, reply) => {
 }
 
 export const retweet = (tweet) => {
-    if (tweet.retweeted===false) {
+    if (!tweet.retweeted) {
         return {
             type: RETWEET,
             payload: store.getState().login.authenticated.post(retweet_uri(tweet))
         }
     } else {
         return {
-            type: ERROR_RETWEET
+            type: UNRETWEET,
+            payload: store.getState().login.authenticated.post(unRetweet_uri(tweet))
         }
     }
 }
-

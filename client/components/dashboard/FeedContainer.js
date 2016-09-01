@@ -15,7 +15,7 @@ class FeedContainer extends React.Component {
   }
   handleSelect(key) {
     this.setState({key});
-    switch(key) {     
+    switch(key) {
       case 1: {
         home_timeline();
         break;
@@ -31,7 +31,7 @@ class FeedContainer extends React.Component {
       <Tabs justified activeKey={this.state.key} onSelect={this.handleSelect} id="controlled-tab-example">
         <Tab eventKey={1} title="Feed"><Tweetlist /></Tab>
         <Tab eventKey={2} title="Profile"><Profile user={this.props.user}/><Tweetlist/></Tab>
-        <Tab eventKey={3} title="Search"><Searchbar/></Tab>
+        <Tab eventKey={3} title="Search"><Searchbar/><Tweetlist search={true}/></Tab>
       </Tabs>
     );
   }

@@ -5,7 +5,7 @@ import Spinner from 'react-spinkit';
 
 class Tweetlist extends React.Component {
 	renderTweets() {
-		if (this.props.user_tweets) {
+		if (this.props.search) {
 			return this.props.tweets.map((tweet) => (<Tweet key={tweet.id} tweet={tweet}/>));	
 		} else {
 			return this.props.tweets.map((tweet) => (<Tweet key={tweet.id} tweet={tweet}/>));
