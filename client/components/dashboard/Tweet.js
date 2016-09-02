@@ -4,12 +4,17 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { retweet, likeTweet } from '../../actions';
 import ReplyModal from './ReplyModal';
-import {Media} from 'react-bootstrap';
-import {Glyphicon} from 'react-bootstrap';
+import {Media, Glyphicon, Collapse, Well } from 'react-bootstrap';
 
-const Tweet = ({tweet, retweet, likeTweet}) => {
-    return (
-        <div><br/>
+class Tweet extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { collapsed: true }
+  }
+
+  render() {
+    const {tweet, retweet, likeTweet} = this.props;
+    return (<div onClick={()=>{this.setState({collapsed:!this.state.collapsed})}}><br/>
         <Media>
         <Media.Left>
         <img width={64} height={64} src={tweet.user.profile_image_url} alt="Profile"/>
@@ -40,10 +45,18 @@ const Tweet = ({tweet, retweet, likeTweet}) => {
                className="fa fa-heart"
                aria-hidden="true"></i></a>
         </div>
+         <Collapse in={!this.state.collapsed}>
+          <div>
+            <Well>
+            TODO : Show tweet replies
+            </Well>
+          </div>
+        </Collapse>
         </Media.Body>
         </Media>
-        </div>
-    );
+        </div>);
+  }
+
 }
 
 const heart_style = {

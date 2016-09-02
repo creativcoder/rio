@@ -2,8 +2,6 @@ import React from 'react';
 import TweetModal from './TweetModal';
 import Spinner from 'react-spinkit';
 import {Glyphicon} from 'react-bootstrap';
-import Notification from '../misc/Notification';
-
 
 export default class Navbar extends React.Component {
     constructor(props) {
@@ -23,7 +21,6 @@ export default class Navbar extends React.Component {
                 <ul style={nav_style} className="nav navbar-nav navbar-right">
                 <TweetModal glyph="send" entities={{type:"tweet", alias: null, recepient:null}}/>
                 </ul>
-                {navigator.onLine?"":<Notification/>}
             </div>
             
         </nav>

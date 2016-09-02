@@ -1,8 +1,8 @@
 import { OAuth } from 'oauthio-web';
 
-// Action strings
 import { AUTH_REQUEST,
          AUTH_SUCCESS,
+         AUTH_ERROR,
          POST_TWEET,
          LIKE_TWEET,
          UNLIKE_TWEET,
@@ -10,10 +10,12 @@ import { AUTH_REQUEST,
          UNRETWEET,
          ERROR_RETWEET,
          HOME_FEED,
+         HOME_FEED_ERROR,
          USER_FEED,
-         UPDATE_USER } from '../constants/action_type';
+         USER_FEED_ERROR,
+         UPDATE_USER,
+         UPDATE_USER_ERROR } from '../constants/action_type';
 
-// API endpoints
 import { home_uri,
          user_uri,
          post_tweet_uri,
@@ -27,31 +29,37 @@ import { store } from '../index';
 
 export const authorize = (pub_key) => {
     OAuth.initialize(pub_key);
-    OAuth.popup('twitter', {cache:true}).then((auth_data) => {
-    auth_data.me().then((user)=>{
-        store.dispatch({type: UPDATE_USER, payload: user})
-    })
-    store.dispatch({type: AUTH_SUCCESS, payload: auth_data});
-    browserHistory.push('home');
-    home_timeline();
-    });
+    OAuth.popup('twitter', {cache:true}).done((auth_data) => {
+        store.dispatch({type: AUTH_SUCCESS, payload: auth_data});
+        auth_data.me().done((user)=>{
+            store.dispatch({type: UPDATE_USER, payload: user})
+        }).fail((err)=>{
+            store.dispatch({type: UPDATE_USER_ERROR, payload: err})
+        })
+        home_timeline();
+        browserHistory.push('home');
+    }).fail(err=>{store.dispatch({type:AUTH_ERROR, payload:err })});
     return {
         type: AUTH_REQUEST
     }
 }
 
 export const home_timeline = () => {
-    store.dispatch({
-        type: HOME_FEED,
-        payload: store.getState().login.authenticated.get(home_uri)
-    })
+    let home_timeline = store.getState().login.authenticated.get(home_uri);
+    home_timeline.done(feed => {
+        store.dispatch({type: HOME_FEED, payload: feed })
+    }).fail(err=>{
+        store.dispatch({type: HOME_FEED_ERROR, payload: err })
+    });
 }
 
 export const user_timeline = () => {
-    store.dispatch({
-        type: USER_FEED,
-        payload: store.getState().login.authenticated.get(user_uri)
-    })
+    let user_timeline = store.getState().login.authenticated.get(user_uri);
+    user_timeline.done(feed => {
+        store.dispatch({type: USER_FEED, payload: feed })
+    }).fail(err=>{
+        store.dispatch({type: USER_FEED_ERROR, payload: err })
+    });
 }
 
 export const postTweet = (new_tweet) => {

@@ -5,8 +5,9 @@ import rootReducer from './reducers';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxPromise from 'redux-promise';
 import { Provider } from 'react-redux';
+import logger from 'redux-logger';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(ReduxPromise, logger())(createStore);
 const redux_devtools = window.devToolsExtension && window.devToolsExtension();
 export const store = createStoreWithMiddleware(rootReducer, redux_devtools);
 
