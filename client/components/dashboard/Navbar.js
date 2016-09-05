@@ -1,11 +1,20 @@
 import React from 'react';
 import TweetModal from './TweetModal';
 import Spinner from 'react-spinkit';
-import {Glyphicon} from 'react-bootstrap';
+import {Glyphicon, Popover, ButtonToolbar, OverlayTrigger, Button } from 'react-bootstrap';
+
+const popoverBottom = (
+  <Popover id="popover-positioned-bottom" title="Hi!">
+    <Button onClick={()=>{
+        OAuth.clearCache();
+    }} bsStyle="info">Logout</Button>
+  </Popover>
+);
 
 export default class Navbar extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {toggle_profile: false};
         this.getUser = this.getUser.bind(this);
     }
     getUser() {
@@ -16,7 +25,13 @@ export default class Navbar extends React.Component {
             <nav className="navbar navbar-default">
             <div className="container-fluid">
             <div className="navbar-header">
-                <a className="navbar-brand" href="#"><strong>{this.getUser()?'@'+this.getUser().alias:<Spinner spinnerName="wave" />}</strong></a>
+            <OverlayTrigger trigger="click" placement="bottom" overlay={popoverBottom}>
+                <a className="navbar-brand" href="#">
+                <strong>
+                {this.getUser()?'@'+this.getUser().alias:<Spinner spinnerName="wave" />}
+                </strong>
+                </a>
+            </OverlayTrigger>
             </div>
                 <ul style={nav_style} className="nav navbar-nav navbar-right">
                 <TweetModal glyph="send" entities={{type:"tweet", alias: null, recepient:null}}/>

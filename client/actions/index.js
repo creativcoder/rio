@@ -14,7 +14,9 @@ import { AUTH_REQUEST,
          USER_FEED,
          USER_FEED_ERROR,
          UPDATE_USER,
-         UPDATE_USER_ERROR } from '../constants/action_type';
+         UPDATE_USER_ERROR,
+         SEARCH_RESULTS,
+         SEARCH_FAILED } from '../constants/action_type';
 
 import { home_uri,
          user_uri,
@@ -22,7 +24,8 @@ import { home_uri,
          like_uri,
          unlike_uri,
          retweet_uri,
-         unRetweet_uri } from '../constants/action_type';
+         unRetweet_uri,
+         search_uri } from '../constants/action_type';
 
 import { browserHistory, router } from 'react-router';
 import { store } from '../index';
@@ -51,6 +54,15 @@ export const home_timeline = () => {
     }).fail(err=>{
         store.dispatch({type: HOME_FEED_ERROR, payload: err })
     });
+}
+
+export const search_tweets = (query) => {
+    let search_results = store.getState().login.authenticated.get(search_uri(query));
+    search_results.done(res => {
+        store.dispatch({type: SEARCH_RESULTS, payload: res})
+    }).fail(err=> {
+        store.dispatch({type: SEARCH_FAILED, payload: err})
+    })
 }
 
 export const user_timeline = () => {

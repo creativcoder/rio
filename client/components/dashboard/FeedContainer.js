@@ -5,7 +5,7 @@ import Profile from './Profile';
 import Searchbar from './Searchbar';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {home_timeline, user_timeline} from '../../actions';
+import {home_timeline, user_timeline, search_tweets } from '../../actions';
 
 class FeedContainer extends React.Component {
   constructor(props) {

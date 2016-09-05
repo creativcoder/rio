@@ -15,6 +15,8 @@ export const HOME_FEED_ERROR = 'HOME_FEED_ERROR';
 export const USER_FEED = 'USER_FEED';
 export const USER_FEED_ERROR = 'USER_FEED_ERROR';
 export const ERROR_RETWEET = 'ERROR_RETWEET';
+export const SEARCH_RESULTS = 'SEARCH_RESULTS';
+export const SEARCH_FAILED = 'SEARCH_FAILED';
 // API endpoints
 export const home_uri = 'https://api.twitter.com/1.1/statuses/home_timeline.json';
 export const user_uri = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
@@ -23,3 +25,4 @@ export const like_uri = 'https://api.twitter.com/1.1/favorites/create.json';
 export const unlike_uri = 'https://api.twitter.com/1.1/favorites/destroy.json';
 export const retweet_uri = (tweet) => `https://api.twitter.com/1.1/statuses/retweet/${tweet.id_str}.json`;
 export const unRetweet_uri = (tweet) => `https://api.twitter.com/1.1/statuses/unretweet/${tweet.id_str}.json`;
+export const search_uri = (query) => `https://api.twitter.com/1.1/search/tweets.json?q=${query}`;

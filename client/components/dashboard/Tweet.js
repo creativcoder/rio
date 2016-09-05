@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { retweet, likeTweet } from '../../actions';
 import ReplyModal from './ReplyModal';
 import {Media, Glyphicon, Collapse, Well } from 'react-bootstrap';
+import tweet_transformer from '../../utils/transformer';
 
 class Tweet extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class Tweet extends React.Component {
         </Media.Left>
         <Media.Body>
         <Media.Heading>{tweet.user.name}(<strong>@{tweet.user.screen_name}</strong>)</Media.Heading>
-        <p>{tweet.text}</p>
+        <p className="tweet">{tweet.text}</p>
         <div className="flex-container" style={flex_style}>
             <ReplyModal entities={{
                     type: "reply",

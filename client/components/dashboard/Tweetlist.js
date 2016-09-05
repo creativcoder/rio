@@ -5,8 +5,8 @@ import Spinner from 'react-spinkit';
 
 class Tweetlist extends React.Component {
 	renderTweets() {
-		if (this.props.search) {
-			return this.props.tweets.map((tweet) => (<Tweet key={tweet.id} tweet={tweet}/>));	
+		if (this.props.search_result.statuses) {
+			return this.props.search_result.statuses.map((tweet) => (<Tweet key={tweet.id} tweet={tweet}/>));	
 		} else {
 			return this.props.tweets.map((tweet) => (<Tweet key={tweet.id} tweet={tweet}/>));
 		}
@@ -29,5 +29,5 @@ const parent_style = {
 	'justifyContent':'center'
 }
 
-const mapStateToProps = ({tweets}) => ({tweets});
+const mapStateToProps = ({tweets, search_result}) => ({tweets, search_result});
 export default connect(mapStateToProps)(Tweetlist);

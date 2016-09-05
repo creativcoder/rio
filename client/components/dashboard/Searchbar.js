@@ -1,17 +1,20 @@
 import React from 'react';
 import Tweetlist from './Tweetlist';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { search_tweets } from '../../actions';
 
-export default class Searchbar extends React.Component {
+class Searchbar extends React.Component {
 	search(e) {
 		e.preventDefault();
-		console.log("Searching");
+		search_tweets(document.getElementById('query').value);
 		return false;
 	}
 	render() {
 		return (
 			<form onSubmit={this.search} className="navbar-form navbar-left">
         		<div className="form-group">
-          			<input type="text"
+          			<input id="query" type="text"
           				   className="form-control"
           				   placeholder="Search tweets, users, etc"/>
         		</div>
@@ -21,3 +24,6 @@ export default class Searchbar extends React.Component {
 		);
 	}
 }
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({search_tweets}, dispatch);
+export default connect(null, mapDispatchToProps)(Searchbar);
