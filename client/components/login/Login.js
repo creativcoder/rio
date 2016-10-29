@@ -11,6 +11,7 @@ import { bindActionCreators } from 'redux';
 import { flex_wrapper, logo_style, login_style, spinner_style } from './style';
 
 const render_login = () => (
+
     <div style={login_style}>
     <p>You are connected now</p>
     <button type="button" id="login-btn"
@@ -47,11 +48,7 @@ const render_spinner = () => {
 }
 
 const prepare_login = () => {
-    if (persistance_enabled()) {
-        return render_spinner();
-    } else {
-        render_login();
-    }
+    return render_spinner();
 }
 
 const Login = ({authorize}) => {
